@@ -5,6 +5,9 @@ import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import AboutUsScreen from './screens/AboutUsScreen';
 
+
+
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -13,7 +16,16 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={isLoggedIn ? 'Home' : 'Login'}>
-        <Stack.Screen name="Login">
+
+        {/* LoginScreen with header hidden */}
+        <Stack.Screen
+          name="Login"
+          options={{ headerShown: false}}
+          >
+            {props => <LoginScreen {...props} setisLoggedIn={setisLoggedIn} />}
+          </Stack.Screen>
+
+        <Stack.Screen name="KAALAMANPI">
           {props => <LoginScreen {...props} setisLoggedIn={setisLoggedIn}/>}
         </Stack.Screen>
         <Stack.Screen name="Home" component={HomeScreen} />
