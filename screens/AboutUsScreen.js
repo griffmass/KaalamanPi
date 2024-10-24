@@ -230,14 +230,24 @@ const AboutUsScreen = () => {
             {/* Footer Icons */}
             
               <View style={styles.iconContainer}>
-                  <Image source={facebookIcon} style={styles.socialIcon} />
-                  <Image source={instagramIcon} style={styles.socialIcon} />
-                  <Image source={emailIcon} style={styles.socialIcon} />
-                  <Image source={twitterIcon} style={styles.socialIcon} />
+                  {/* Icons with Touch Opacity Event */}
+                  <TouchableOpacity>
+                      <Image source={facebookIcon} style={styles.socialIcon} />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                      <Image source={instagramIcon} style={styles.socialIcon} />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                      <Image source={emailIcon} style={styles.socialIcon} />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                      <Image source={twitterIcon} style={styles.socialIcon} />
+                  </TouchableOpacity>
                   {/* Go to github repository */}
                   <TouchableOpacity onPress={openGitHub}>
-                  <Image source={githubIcon} style={styles.socialIcon} />
+                      <Image source={githubIcon} style={styles.socialIcon} />
                   </TouchableOpacity>
+
               </View>
                   {/* Right >> Horizontal Line */}
             <View style={styles.horizontalLine} />  
