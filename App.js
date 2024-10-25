@@ -23,9 +23,7 @@ export default function App() {
     const loadFonts = async () => {
       await Font.loadAsync({
         'Protest-Riot': require('./assets/fonts/Protest_Riot/ProtestRiot-Regular.ttf'), // Make sure the path is correct
-        'Montserrat': require('./assets/fonts/Montserrat/static/Montserrat-Regular.ttf'), // Make sure the path is correct
         'Poppins': require('./assets/fonts/Poppins/Poppins-Regular.ttf'), //
-        'OpenSans': require('./assets/fonts/Open_Sans/static/OpenSans_Condensed-Bold.ttf'), //
       });
       setFontsLoaded(true);
     };

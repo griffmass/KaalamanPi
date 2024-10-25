@@ -23,8 +23,8 @@ const LoginScreen = ({ navigation, setisLoggedIn }) => {
     }
     // handle the login functionality
     const handleLogin = () => {
-        const validUsername = '';
-        const validPassword = '';
+        const validUsername = 'kaalamanpi';
+        const validPassword = 'salamatpo';
         // check if the username and password are correct
         if (username === validUsername && password === validPassword) {
             setisLoggedIn(true);
@@ -42,10 +42,12 @@ const LoginScreen = ({ navigation, setisLoggedIn }) => {
             {/* Container for the login form */}
         <View style={styles.container}>
             {/* Logo */}
+            <TouchableOpacity>
             <Image 
                 source={logo}
                 style={styles.logo}
             />
+            </TouchableOpacity>
 
             {/* Username Input with User Icon*/}
             <View style={styles.inputContainer}>

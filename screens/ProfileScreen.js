@@ -52,7 +52,7 @@ export default function ProfileScreen() {
           {/* logo and text container of KaalamanPi */}
           <View style={styles.footerLogoTextContainer}>
             <Image source={require('../assets/images/logo/kaalamanpi-vector.png')} style={styles.footerLogo} />
-            <Text style={styles.footerLogoText}>KaalamPi</Text>
+            <Text style={styles.footerLogoText}>KaalamanPi</Text>
           </View>
         {/* Text footer */}
         <Text style={styles.textFooter}>

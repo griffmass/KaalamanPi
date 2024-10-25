@@ -23,8 +23,10 @@ const CustomHeader = () => {
         <View style={styles.headerContainer}>
             {/* Logo and Title */}
             <View style={styles.leftContainer}>
+                <TouchableOpacity>
                 <Image source={logo} style={styles.logo} />
-                <Text style={styles.headerTitle}>KaalamnPi</Text>
+                </TouchableOpacity>
+                <Text style={styles.headerTitle}>KaalamanPi</Text>
             </View>
 
             {/* Navigation Button */}
