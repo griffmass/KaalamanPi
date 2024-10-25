@@ -50,13 +50,15 @@ Follow these steps to set up the project:
     ```bash
    npx expo start
     ```
-2. **If prompted with any questions (such as "Do you want to install additional dependencies?"), press y (yes).**
+2. **If prompted with any questions (such as "Use port 8082 instead? » (Y/n)"), press y (yes).**
 
 3. **Once the server starts, a QR code will be displayed in the terminal.**
 
 ## 4. Run the App
 
 1. **Scan the QR code using the Expo Go app on your mobile device. The app will load and run on your device.**
+
+<div align="center"> <img src="https://raw.githubusercontent.com/ferguzus/sample-image/main/Screenshot 2024-10-25 081641.png"> </div>
 
 # Troubleshooting
 
