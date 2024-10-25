@@ -4,7 +4,7 @@
 
 KaalamPi is a platform that focuses on the integration of knowledge (kaalaman) across various subjects, including math symbolized by "Pi."
 
-<div align="center"> <img src="https://raw.githubusercontent.com/ferguzus/KaalamanPi/main/kaalamanpi_thumbnail.png"> </div>
+<div align="center"> <img src="https://raw.githubusercontent.com/ferguzus/sample-image/main/kaalamanpi_thumbnail.png"> </div>
 
 ## Prerequisites
 
@@ -20,9 +20,9 @@ Follow these steps to set up the project:
 
 ## 1. Clone the Repository
 
-1. **Open your terminal.**
+1. **Open your VSCode terminal.**
 
-2. **Navigate to your desired directory (e.g., D: drive):**
+2. **Navigate to your desired directory (e.g., C: drive):**
     ```bash
    cd C:
     ```
@@ -40,8 +40,8 @@ Follow these steps to set up the project:
     ```
 
 ## 2. Install Project Dependencies
-
 1. **After cloning the repository and navigating to the project folder, install the local Expo package:**
+
     ```bash
    npm install expo
     ```
@@ -60,7 +60,7 @@ Follow these steps to set up the project:
 
 # Troubleshooting
 
-**If you encounter issues with Expo installation or the development server, follow these steps:** 
+**If you encounter issues with Expo installation or the development server, follow these step:** 
 1. **Reinstall Expo CLI using the --force flag:**
    
     ```bash
