@@ -54,7 +54,7 @@ const Algebra = () => {
               </Text>
               <View style={styles.tableImageWrapper}>
                   <Image
-                    source={require('../assets/images/equations-inequalities/inequalities.png')}
+                    source={require('../assets/images/equations-inequalities/equations.png')}
                     style={styles.tableImage}
                   />
                   </View>
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   tableImageWrapper: {
     width: '78%',
     height: 200,
-    borderRadius: 15,
+    borderRadius: 10,
     marginTop: 20,
     marginBottom: 20,
     // Shadow properties for Android
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'contain',
-    borderRadius: 15, // Ensures border radius is applied to the image as well
+    borderRadius: 10, // Ensures border radius is applied to the image as well
   },
   // Bluish Green Rectangle on Bottom
   bottomRectangle: {
