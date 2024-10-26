@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
   graphImagerWrapper: {
     width: 300,
     height: 250,
-    borderRadius: 15,
+    borderRadius: 10,
     marginTop: 20,
     marginBottom: 20,
     elevation: 5,
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'cover',
-    borderRadius: 15,
+    borderRadius: 10,
   },
 
   // Bluish Green Rectangle on Bottom
