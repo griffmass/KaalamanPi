@@ -154,12 +154,15 @@ const AboutUsScreen = () => {
         • Abanil utilizes color theory and the
         </Text>
         <Text style={styles.subSectionText}>
-        60-30-10 rule to ensure visual
-        harmony. By assigning 60% to a
-        dominant color (deep teal-blue), 30% to a secondary color
-        easily process mathematical
-        information by visually separating
-        content.
+        Abanil utilizes color theory and 
+        the 60-30-10 rule to ensure visual harmony. 
+        By assigning 60% to a dominant color 
+        (Light Gray-Beige), 30% to a secondary color 
+        (Bluish Green), and 10% to an accent color 
+        (Vibrant Orange Yellow) & (Medium Gray), 
+        they enhance the design’s visual appeal and 
+        readability, crucial for retaining user 
+        focus on math content.
         </Text>
       </View>
 
@@ -187,28 +190,19 @@ const AboutUsScreen = () => {
         • Macarubbo has chosen a mix of
         </Text>
         <Text style={styles.subSectionText}>
-          Potta One, Protest Riot, and Poppins fonts for the math-themed Figma design:
-        </Text>
-
-        {/* Potta One */}
-        <Text style={[styles.subSectionItem,styles.sectionItemLine]}>a. Potta One: Adds elegance and</Text>
-        <Text style={styles.subSectionItem}>6
-          draws attention to key sections.
-          Perfect for highlighting major
-          sections, such as “Algebra”, 
-          “Geometry”, and ”Statistics &
-          Probability” drawing attention to
-          important content.
+          Protest Riot, and Poppins fonts for the math-themed Figma design:
         </Text>
 
         {/* Protest-Riot */}
-        <Text style={[styles.subSectionItem,styles.sectionItemLine]}>b. Protest Riot: Bold and striking, ideal</Text>
+        <Text style={[styles.subSectionItem,styles.sectionItemLine]}>a. Protest Riot: Adds elegance and</Text>
         <Text style={styles.subSectionItem}>
-              for highlighting important contents.
+         draws attention to key sections. Perfect for 
+         highlighting major sections and drawing 
+         attention to important contents.
         </Text>
 
         {/* Poppins */}
-        <Text style={[styles.subSectionItem,styles.sectionItemLine]}>c. Poppins: Clean, modern sans-serif</Text>
+        <Text style={[styles.subSectionItem,styles.sectionItemLine]}>b. Poppins: Clean, modern sans-serif</Text>
         <Text style={styles.subSectionItem}>
               for body text, ensuring readability throughout the design.
         </Text>
