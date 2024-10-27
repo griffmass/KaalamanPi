@@ -154,13 +154,12 @@ const AboutUsScreen = () => {
         • Abanil utilizes color theory and the
         </Text>
         <Text style={styles.subSectionText}>
-        Abanil utilizes color theory and 
-        the 60-30-10 rule to ensure visual harmony. 
+        60-30-10 rule to ensure visual harmony. 
         By assigning 60% to a dominant color 
         (Light Gray-Beige), 30% to a secondary color 
         (Bluish Green), and 10% to an accent color 
         (Vibrant Orange Yellow) & (Medium Gray), 
-        they enhance the design’s visual appeal and 
+        they enhance the design's visual appeal and 
         readability, crucial for retaining user 
         focus on math content.
         </Text>
@@ -190,7 +189,7 @@ const AboutUsScreen = () => {
         • Macarubbo has chosen a mix of
         </Text>
         <Text style={styles.subSectionText}>
-          Protest Riot, and Poppins fonts for the math-themed Figma design:
+          Protest Riot and Poppins fonts for the math-themed Figma design:
         </Text>
 
         {/* Protest-Riot */}
