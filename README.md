@@ -2,7 +2,9 @@
 
 ## Overview
 
+`
 KaalamPi is a platform that focuses on the integration of knowledge (kaalaman) across various subjects, including math symbolized by "Pi."
+`
 
 <div align="center"> <img src="https://raw.githubusercontent.com/ferguzus/sample-image/main/kaalamanpi_thumbnail.png"> </div>
 
