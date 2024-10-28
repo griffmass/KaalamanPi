@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/ferguzus/KaalamanPi/main/assets/images/logo/kaalamanpi-vector-text.png" alt="vscode" width="20" height="20"/> KaalamanPi
+# <img src="https://raw.githubusercontent.com/ferguzus/KaalamanPi/main/assets/images/logo/kaalamanpi-vector-text.png" alt="vscode" width="50" height="50"/> KaalamanPi
 
 ## Overview
 
