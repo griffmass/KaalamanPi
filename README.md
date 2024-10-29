@@ -20,7 +20,7 @@
 
 ` Follow these steps to set up the project: `
 
-## ` 1. Clone the Repository `
+## 1. Clone the Repository
 
 1. ` Open your VSCode terminal. `
 
@@ -41,13 +41,13 @@
    cd KaalamanPi
     ```
 
-## ` 2. Install Project Dependencies `
+## 2. Install Project Dependencies
 1. ` After cloning the repository and navigating to the project folder, install the local Expo package: `
 
     ```bash
    npm install expo
     ```
-## ` 3. Start the Development Server `
+## 3. Start the Development Server
 1. ` To start the Expo development server, run: `
     ```bash
    npx expo start
@@ -56,7 +56,7 @@
 
 3. ` Once the server starts, a QR code will be displayed in the terminal. `
 
-## ` 4. Run the App `
+## 4. Run the App
 
 1. ` Scan the QR code using the Expo Go app on your mobile device. The app will load and run on your device. `
 
