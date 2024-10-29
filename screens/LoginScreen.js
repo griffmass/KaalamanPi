@@ -23,8 +23,8 @@ const LoginScreen = ({ navigation, setisLoggedIn }) => {
     }
     // handle the login functionality
     const handleLogin = () => {
-        const validUsername = 'kaalamanpi';
-        const validPassword = 'salamatpo';
+        const validUsername = '';
+        const validPassword = '';
         // check if the username and password are correct
         if (username === validUsername && password === validPassword) {
             setisLoggedIn(true);
