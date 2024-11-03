@@ -5,6 +5,7 @@ import * as Font from 'expo-font'; // Import expo-font
 import { ActivityIndicator, View } from 'react-native';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
+import SignupScreen from './screens/SignupScreen'; // <==== SignUp Screen
 import AboutUsScreen from './screens/AboutUsScreen';
 import CustomHeader from './components/CustomHeader';
 import ProfileScreen from './screens/ProfileScreen';
@@ -49,6 +50,12 @@ export default function App() {
         >
           {props => <LoginScreen {...props} setisLoggedIn={setisLoggedIn} />}
         </Stack.Screen>
+
+        <Stack.Screen
+          name="Signup"
+          component={SignupScreen}
+          options={{ headerShown: false }}
+        />
 
         <Stack.Screen
           name="Home"

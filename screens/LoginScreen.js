@@ -1,145 +1,172 @@
-import React, {useState} from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, ImageBackground, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react'; // commented out the useCallback
+import { 
+    View, 
+    Text, 
+    StyleSheet, 
+    Image, 
+    TouchableOpacity, 
+    TextInput, 
+    ImageBackground, 
+    ActivityIndicator, 
+    Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as Font from 'expo-font';
 import colors from '../components/colors';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
+import { useFocusEffect } from "@react-navigation/native";
 
-    // Import Logo and Background Image
+// Import Logo and Background Image
 const logo = require('../assets/images/logo/kaalamanpi-vector-text.png');
 const backgroundImage = require('../assets/images/landing-page/math.jpg');
 
 const LoginScreen = ({ navigation, setisLoggedIn }) => {
-        // Load the custom font [ Poppins-SemiBold ]
+    // Load the custom font [ Poppins-SemiBold ]
     const [fontsLoaded] = Font.useFonts({
         'Poppins-SemiBold': require('../assets/fonts/Poppins/Poppins-SemiBold.ttf'),
     });
-    // Variables for username, pass, and rememberme check box
-    const [username, setUsername] = useState('');
+
+    // Variables for email, password, and remember me checkbox
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
+    const [loading, setLoading] = useState(false);
 
+    // Ensure loading indicator is displayed only when fonts are loaded
     if (!fontsLoaded) {
         return <ActivityIndicator size="large" color="#F2B705" />;
     }
-    // handle the login functionality
-    const handleLogin = () => {
-        const validUsername = '';
-        const validPassword = '';
-        // check if the username and password are correct
-        if (username === validUsername && password === validPassword) {
-            setisLoggedIn(true);
-            navigation.navigate('Home');
-        } else {
-            alert('Invalid credentials. Please try again.');
+
+    // LOGIN FUNCTION WITH FIREBASE
+    const handleLogin = async () => {
+        if (!email || !password) {
+            Alert.alert("Error", "Please enter your email and password.");
+            return;
         }
 
+        setLoading(true);
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            setisLoggedIn(true);
+            navigation.navigate('Home');
+        } catch (error) {
+            Alert.alert("Login Failed", "Invalid credentials. Please try again.");
+        } finally {
+            setLoading(false);
+        }
     };
 
+    // useFocusEffect(
+    //     useCallback(() => {
+    //         // Reset the input fields
+    //         setEmail("");
+    //         setPassword("");
+    //         setRememberMe(false);
+    //     }, [])
+    // );
+
+    
     return (
         <ImageBackground source={backgroundImage} style={styles.background}>
             {/* Dark overlay over the background image */}
             <View style={styles.overlay}/>
-            {/* Container for the login form */}
-        <View style={styles.container}>
-            {/* Logo */}
-            <TouchableOpacity>
-            <Image 
-                source={logo}
-                style={styles.logo}
-            />
-            </TouchableOpacity>
-
-            {/* Username Input with User Icon*/}
-            <View style={styles.inputContainer}>
-                <Icon name="user" size={20} color="#000" style={styles.icon} />
-            <TextInput
-                style={styles.input}
-                placeholder="Username"
-                value={username}
-                onChangeText={setUsername}
-            />
-            </View>
-            
-            {/* Password Input with Lock Icon */}
-            <View style={styles.inputContainer}>
-                <Icon name="lock" size={20} color="#000" style={styles.icon} />
-            <TextInput
-                style={styles.input}
-                placeholder="Password"
-                secureTextEntry={true}
-                value={password}
-                onChangeText={setPassword}
-            />
-            </View>
-
-            {/* Custom Remember Me with Icon */}
-            <View style={styles.rememberForgotContainer}>
-                <TouchableOpacity
-                    style={styles.checkboxContainer}
-                    onPress={() => setRememberMe(!rememberMe)}
-                >
-                    <Icon
-                        name={rememberMe ? "check-square" : "square-o"}
-                        size={20}
-                        color="#fff"
-                        style={{ position: 'relative', top: -2}}
+            <View style={styles.container}>
+                {/* Logo */}
+                <TouchableOpacity>
+                    <Image 
+                        source={logo}
+                        style={styles.logo}
                     />
-
-                    <Text style={[styles.smallText, { marginLeft: 5}]}>Remember me</Text>
                 </TouchableOpacity>
+
+                {/* Email Input with User Icon*/}
+                <View style={styles.inputContainer}>
+                    <Icon name="envelope" size={20} color="#000" style={styles.icon} />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Email"
+                        value={email}
+                        onChangeText={setEmail}
+                        keyboardType="email-address"
+                        autoCapitalize="none"
+                    />
+                </View>
                 
-                <TouchableOpacity>
-                    <Text style={styles.smallText}>Forgot Password?</Text>
-                </TouchableOpacity>
-            </View>
+                {/* Password Input with Lock Icon */}
+                <View style={styles.inputContainer}>
+                    <Icon name="lock" size={20} color="#000" style={styles.icon} />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Password"
+                        secureTextEntry={true}
+                        value={password}
+                        onChangeText={setPassword}
+                    />
+                </View>
 
-            {/* Login Button */}
-            <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-                <Text style={styles.loginButtonText}>Login</Text>
-            </TouchableOpacity>
+                {/* Remember Me and Forgot Password */}
+                <View style={styles.rememberForgotContainer}>
+                    <TouchableOpacity
+                        style={styles.checkboxContainer}
+                        onPress={() => setRememberMe(!rememberMe)}
+                    >
+                        <Icon
+                            name={rememberMe ? "check-square" : "square-o"}
+                            size={20}
+                            color="#fff"
+                            style={{ position: 'relative', top: -2}}
+                        />
+                        <Text style={[styles.smallText, { marginLeft: 5}]}>Remember me</Text>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity>
+                        <Text style={styles.smallText}>Forgot Password?</Text>
+                    </TouchableOpacity>
+                </View>
 
-            {/* Sign In */}
-            <View style={styles.signInContainer}>
-                <Text style={styles.smallText}>Don't have an account?</Text>
-                <TouchableOpacity>
-                    <Text style={styles.signInText}>Sign In</Text>
+                {/* Login Button */}
+                <TouchableOpacity style={styles.loginButton} onPress={handleLogin} disabled={loading}>
+                    {loading ? (
+                        <ActivityIndicator size="small" color="#fff" />
+                    ) : (
+                        <Text style={styles.loginButtonText}>Login</Text>
+                    )}
                 </TouchableOpacity>
+
+                {/* Sign In */}
+                <View style={styles.signInContainer}>
+                    <Text style={styles.smallText}>Don't have an account?</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+                        <Text style={styles.signInText}>Sign Up</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-        </View>
         </ImageBackground>
     );
 };
  
 const styles = StyleSheet.create({
-
-    // Background image for the login screen
     background: {
         flex: 1,
         resizeMode: 'cover',
     },
-
-    // Dark overlay to improve text readability over the background image
     overlay: {
         ...StyleSheet.absoluteFillObject,
         backgroundColor: colors.blackoverlay,
     },
-
-    // Main container for the login form
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 20,
     },
-    
-    // Logo styling
     logo: {
         width: 300,
         height: 200,
         marginBottom: 10,
         opacity: 0.9,
     },
-    // Input container styling for username and password fields
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -152,33 +179,27 @@ const styles = StyleSheet.create({
         backgroundColor: colors.transparentwhite,
         elevation: 5,
     },
-    // icons [user] & [lock]
     icon: {
-        marginLeft: 5,
         color: colors.black,
     },
-    // Text input styling 
     input: {
         height: 44,
         fontSize: 15,
         flex: 1,
-        paddingLeft: 30,
-        paddingRight: 30,
-        fontFamily: 'Poppins-SemiBold',
+        paddingLeft: 13,
+        fontFamily: "Poppins-SemiBold",
         color: colors.black,
+        paddingTop: 5,
     },
-    // Container for the 'Remember me' and 'Forgot Password' options
     rememberForgotContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '65%',
         marginBottom: 20,
     },
-    // Container for the 'Remember me' checkbox
     checkboxContainer: {
         flexDirection: 'row',
     },
-    // styles for small texts
     smallText: {
         fontSize: 9,
         color: '#fff',
@@ -187,7 +208,6 @@ const styles = StyleSheet.create({
         textShadowOffset: { width: 1, height: 1},
         textShadowRadius: 2,
     },
-    // Login Button Design
     loginButton: {
         width: '70%',
         backgroundColor: colors.transparentdarker,
@@ -196,24 +216,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         elevation: 5,
     },
-    // Login Button Text Design
     loginButtonText: {
         color: colors.white,
         fontSize: 18,
         fontFamily: 'Poppins-SemiBold',
     },
-    // Container for SIGN IN
     signInContainer: {
         flexDirection: 'row',
         marginTop: 10,
     },
-    // Text styling for SIGN IN
     signInText: {
         fontSize: 9,
         color: colors.gold,
         marginLeft: 5,
         fontFamily: 'Poppins-SemiBold',
     },
-    });
+});
 
-    export default LoginScreen
+export default LoginScreen;

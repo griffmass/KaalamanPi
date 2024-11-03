@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import colors from '../components/colors';
 
@@ -27,6 +27,26 @@ export default function ProfileScreen() {
     { text: 'Logout', screen: 'Login' }, // Option with screen property
   ];
 
+  // Logout Confirmation
+  const logoutConfirmation = () => {
+    Alert.alert(
+      "Confirm Logout",
+      "Are you sure you want to log out?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "Logout",
+          onPress: () => navigation.navigate('Login')
+        }
+      ],
+      { cancelable: true }
+    );
+  };
+
   return (
         // Container of Whole Profile User Interface
     <ScrollView contentContainerStyle={styles.container}>
@@ -43,7 +63,7 @@ export default function ProfileScreen() {
           <Options
           key={index}
           text={item.text}
-          onPress={() => item.screen && navigation.navigate(item.screen)}
+          onPress={() => item.screen === 'Login' ? logoutConfirmation() : item.screen && navigation.navigate(item.screen)}
           />
         ))}
 
