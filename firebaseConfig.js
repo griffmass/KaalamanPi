@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'; // Import 
 const firebaseConfig = {
   apiKey: "AIzaSyAWL799ZQvGxstnlDMocU8j-SN3x4T0vkQ",
   authDomain: "kaalamanpi.firebaseapp.com",
+  databaseURL: "https://kaalamanpi-default-rtdb.firebaseio.com/",
   projectId: "kaalamanpi",
   storageBucket: "kaalamanpi.appspot.com",
   messagingSenderId: "415785359017",
