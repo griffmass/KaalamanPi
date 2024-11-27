@@ -12,6 +12,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import Statistics_Probability from './screens/Statistics_Probability'; // Importing the ToggleStats screen
 import Algebra from './screens/Algebra'; 
 import Geometry from './screens/Geometry'; 
+import Counter from './screens/Counter';
 
 const Stack = createStackNavigator();
 
@@ -91,6 +92,12 @@ export default function App() {
         <Stack.Screen
           name="ToggleGeometry"
           component={Geometry}
+          options={{ header: () => <CustomHeader /> }} // Customize the header as needed
+        />
+
+        <Stack.Screen
+          name="Counter"
+          component={Counter}
           options={{ header: () => <CustomHeader /> }} // Customize the header as needed
         />
 

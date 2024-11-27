@@ -105,6 +105,28 @@ const CustomHeader = () => {
                                         About
                                 </Text>
                     </TouchableOpacity>
+
+                    {/* Counter New Added for Activity only */}
+                    <TouchableOpacity 
+                        style={[
+                            styles.menuItemContainer,
+                            currentRoute === 'Counter' ? styles.activeMenuItem : null,  // Highlight active item
+                            hoverItem === 'Counter' ? styles.hovered : null,  // Highlight when hovering
+                                ]}
+                                onPress={() => navigation.navigate('Counter')}  // Navigate to About Us screen
+                                onPressIn={() => setHoveredItem('Counter')}  // On hover
+                                onPressOut={() => setHoveredItem(null)}  // Remove hover state
+                            >
+                        {/* About Us Icon */}
+                                <MaterialIcons name="info" size={20} color={currentRoute === 'Counter' ? '#E3E3D6' : '#555'} style={styles.menuIcon} />
+                        {/* About Us Text */}
+                                <Text style={[
+                                    styles.menuItem,
+                                    { color: currentRoute === 'Counter' ? '#E3E3D6' : '#555'} // Change color based on active state
+                                    ]}> 
+                                        Counter
+                                </Text>
+                    </TouchableOpacity>
                 </View>
              )}
             {/* Section divider (a line at the bottom of the header) */}
