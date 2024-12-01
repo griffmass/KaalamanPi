@@ -1,13 +1,16 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import colors from '../components/colors';
+import React from "react";
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import colors from "../components/colors";
+import { logout } from '../components/Logout';
+
+
 
 const Options = ({ text, onPress }) => (
   <TouchableOpacity style={styles.options} onPress={onPress}>
     <View style={styles.rowOption}>
       <Text style={styles.textOption}>{text}</Text>
-      <Image source={require('../assets/images/arrow/arrowright.png')} style={styles.arrowIcon} />
+      <Image source={require("../assets/images/arrow/arrowright.png")} style={styles.arrowIcon} />
     </View>
   </TouchableOpacity>
 );
@@ -15,71 +18,42 @@ const Options = ({ text, onPress }) => (
 export default function ProfileScreen() {
   const navigation = useNavigation();
 
-  // Profile Options [array] with 8 objects
   const ProfileOptions = [
-    { text: 'My Profile' },
-    { text: 'Languages & region' },
-    { text: 'Help & feedback' },
-    { text: 'Rate the app' },
-    { text: 'Terms of service' },
-    { text: 'Licenses' },
-    { text: 'Delete account' },
-    { text: 'Logout', screen: 'Login' }, // Option with screen property
+    { text: "My Profile" },
+    { text: "Languages & region" },
+    { text: "Help & feedback" },
+    { text: "Rate the app" },
+    { text: "Terms of service" },
+    { text: "Licenses" },
+    { text: "Delete account" },
+    { text: "Logout", action: () => logout(navigation) }, // Use logout function
   ];
 
-  // Logout Confirmation
-  const logoutConfirmation = () => {
-    Alert.alert(
-      "Confirm Logout",
-      "Are you sure you want to log out?",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
-        },
-        {
-          text: "Logout",
-          onPress: () => navigation.navigate('Login')
-        }
-      ],
-      { cancelable: true }
-    );
-  };
-
   return (
-        // Container of Whole Profile User Interface
     <ScrollView contentContainerStyle={styles.container}>
-        {/* Profile Picture and Name */}
-        <View style={styles.profileSection}>
-          <View style={styles.imageShadowContainer}>
-            <Image source={require('../assets/images/people/jm.jpg')} style={styles.profilePicture} />
-          </View>
-          <Text style={styles.profileName}>JM Abanil</Text>
+      {/* Profile Picture and Name */}
+      <View style={styles.profileSection}>
+        <View style={styles.imageShadowContainer}>
+          <Image source={require("../assets/images/people/jm.jpg")} style={styles.profilePicture} />
         </View>
-
-        {/* This block of codes will check if you touched the Profile option with a screen property */}
-        {ProfileOptions.map((item, index) => (
-          <Options
-          key={index}
-          text={item.text}
-          onPress={() => item.screen === 'Login' ? logoutConfirmation() : item.screen && navigation.navigate(item.screen)}
-          />
-        ))}
-
-        {/* Footer */}
-        <View style={styles.footer}>
-          {/* logo and text container of KaalamanPi */}
-          <View style={styles.footerLogoTextContainer}>
-            <Image source={require('../assets/images/logo/kaalamanpi-vector.png')} style={styles.footerLogo} />
-            <Text style={styles.footerLogoText}>KaalamanPi</Text>
-          </View>
-        {/* Text footer */}
-        <Text style={styles.textFooter}>
-          By signing in, you agree to our Terms fo Service and Privacy Policy
-        </Text>
+        <Text style={styles.profileName}>JM Abanil</Text>
       </View>
 
+      {/* Options */}
+      {ProfileOptions.map((item, index) => (
+        <Options key={index} text={item.text} onPress={item.action || (() => {})} />
+      ))}
+
+      {/* Footer */}
+      <View style={styles.footer}>
+        <View style={styles.footerLogoTextContainer}>
+          <Image source={require("../assets/images/logo/kaalamanpi-vector.png")} style={styles.footerLogo} />
+          <Text style={styles.footerLogoText}>KaalamanPi</Text>
+        </View>
+        <Text style={styles.textFooter}>
+          By signing in, you agree to our Terms of Service and Privacy Policy
+        </Text>
+      </View>
     </ScrollView>
   );
 }
