@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { ref, onValue, set } from "firebase/database";
 import { rtdb } from "../firebaseConfig";
 import colors from "../components/colors";
+import { logout } from '../components/Logout';
 
 function Counter() {
   const navigation = useNavigation();
@@ -48,13 +49,13 @@ function Counter() {
       <View style={styles.navContainer}>
         <TouchableOpacity
           style={styles.navButton}
-          onPress={() => navigation.navigate("HomeScreen")}
+          onPress={() => navigation.navigate("Home")}
         >
           <Text style={styles.navButtonText}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.navButton}
-          onPress={() => navigation.navigate("LoginScreen")}
+          onPress={() => logout(navigation)} // Use the logout function
         >
           <Text style={styles.navButtonText}>Logout</Text>
         </TouchableOpacity>
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "Poppins",
     color: colors.lighter,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
 });
 
