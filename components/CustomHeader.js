@@ -191,40 +191,40 @@ const styles = StyleSheet.create({
     dropdown: {
         position: 'absolute',
         top: 60,
-        right: 0,
+        right: -6,
         backgroundColor: colors.white,
         padding: 10,
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-around', // Ensures items are spaced evenly
         elevation: 5,
     },
-    // container of selection [Home, Profile, About Us]
+    // Container for individual menu items
     menuItemContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: 17,
+        paddingHorizontal: 15, // Reduced from 17 to tighten spacing
     },
-    // change background of option when touched
+    // Change background of option when touched
     hovered: {
         backgroundColor: colors.black,
-        borderRadius: 20,
+        borderRadius: 10, // Reduced from 20
     },
-    // Home, Profile, AboutUs
+    // Menu item styling (text)
     menuItem: {
         paddingVertical: 5,
-        fontSize: 16,
+        fontSize: 10,
         fontFamily: 'Poppins-SemiBold',
         color: colors.black,
     },
-    // custom menu icons
+    // Custom menu icons
     menuIcon: {
-        marginRight: 12,
+        marginRight: 5,
         color: colors.black,
     },
-    // background of option
+    // Background of active option
     activeMenuItem: {
         backgroundColor: colors.transparentlighter,
-        borderRadius: 20,
+        borderRadius: 10, // Reduced from 20
         elevation: 5,
     },
     // Dark green line on top
