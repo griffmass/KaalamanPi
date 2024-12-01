@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'; // Added useCallback
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
     View, 
     Text, 
@@ -8,39 +8,53 @@ import {
     TextInput, 
     ImageBackground, 
     ActivityIndicator, 
-    Alert } from 'react-native';
+    Alert 
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import * as Font from 'expo-font';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 import colors from '../components/colors';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect } from '@react-navigation/native';
 
 // Import Logo and Background Image
 const logo = require('../assets/images/logo/kaalamanpi-vector-text.png');
 const backgroundImage = require('../assets/images/landing-page/math.jpg');
 
-const LoginScreen = ({ navigation, setisLoggedIn }) => {
-    // Load the custom font [ Poppins-SemiBold ]
-    const [fontsLoaded] = Font.useFonts({
-        'Poppins-SemiBold': require('../assets/fonts/Poppins/Poppins-SemiBold.ttf'),
-    });
-
-    // Variables for email, password, and remember me checkbox
+const LoginScreen = ({ navigation, setisLoggedIn = () => {} }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    // Ensure loading indicator is displayed only when fonts are loaded
-    if (!fontsLoaded) {
-        return <ActivityIndicator size="large" color="#F2B705" />;
-    }
+    // Check login status on app start
+    useEffect(() => {
+        const checkAuthState = async () => {
+            const storedEmail = await AsyncStorage.getItem('email');
+            const storedPassword = await AsyncStorage.getItem('password');
+            const storedRememberMe = JSON.parse(await AsyncStorage.getItem('rememberMe'));
+
+            if (storedRememberMe && storedEmail && storedPassword) {
+                try {
+                    setLoading(true);
+                    await signInWithEmailAndPassword(auth, storedEmail, storedPassword);
+                    setisLoggedIn(true);
+                    navigation.navigate('Home');
+                } catch (error) {
+                    console.error('Auto-login failed:', error.message);
+                } finally {
+                    setLoading(false);
+                }
+            }
+        };
+
+        checkAuthState();
+    }, []);
 
     // LOGIN FUNCTION WITH FIREBASE
     const handleLogin = async () => {
         if (!email || !password) {
-            Alert.alert("Error", "Please enter your email and password.");
+            Alert.alert('Error', 'Please enter your email and password.');
             return;
         }
 
@@ -49,9 +63,21 @@ const LoginScreen = ({ navigation, setisLoggedIn }) => {
         try {
             await signInWithEmailAndPassword(auth, email, password);
             setisLoggedIn(true);
+
+            // Save credentials if "Remember Me" is checked
+            if (rememberMe) {
+                await AsyncStorage.setItem('email', email);
+                await AsyncStorage.setItem('password', password);
+                await AsyncStorage.setItem('rememberMe', JSON.stringify(true));
+            } else {
+                await AsyncStorage.removeItem('email');
+                await AsyncStorage.removeItem('password');
+                await AsyncStorage.setItem('rememberMe', JSON.stringify(false));
+            }
+
             navigation.navigate('Home');
         } catch (error) {
-            Alert.alert("Login Failed", "Invalid credentials. Please try again.");
+            Alert.alert('Login Failed', 'Invalid credentials. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -59,29 +85,20 @@ const LoginScreen = ({ navigation, setisLoggedIn }) => {
 
     useFocusEffect(
         useCallback(() => {
-            // Reset the input fields
             setEmail('');
             setPassword('');
             setRememberMe(false);
         }, [])
     );
-    
 
-    
     return (
         <ImageBackground source={backgroundImage} style={styles.background}>
-            {/* Dark overlay over the background image */}
-            <View style={styles.overlay}/>
+            <View style={styles.overlay} />
             <View style={styles.container}>
-                {/* Logo */}
                 <TouchableOpacity>
-                    <Image 
-                        source={logo}
-                        style={styles.logo}
-                    />
+                    <Image source={logo} style={styles.logo} />
                 </TouchableOpacity>
 
-                {/* Email Input with User Icon*/}
                 <View style={styles.inputContainer}>
                     <Icon name="envelope" size={20} color="#000" style={styles.icon} />
                     <TextInput
@@ -94,7 +111,6 @@ const LoginScreen = ({ navigation, setisLoggedIn }) => {
                     />
                 </View>
                 
-                {/* Password Input with Lock Icon */}
                 <View style={styles.inputContainer}>
                     <Icon name="lock" size={20} color="#000" style={styles.icon} />
                     <TextInput
@@ -106,19 +122,18 @@ const LoginScreen = ({ navigation, setisLoggedIn }) => {
                     />
                 </View>
 
-                {/* Remember Me and Forgot Password */}
                 <View style={styles.rememberForgotContainer}>
                     <TouchableOpacity
                         style={styles.checkboxContainer}
                         onPress={() => setRememberMe(!rememberMe)}
                     >
                         <Icon
-                            name={rememberMe ? "check-square" : "square-o"}
+                            name={rememberMe ? 'check-square' : 'square-o'}
                             size={20}
                             color="#fff"
-                            style={{ position: 'relative', top: -2}}
+                            style={{ position: 'relative', top: -2 }}
                         />
-                        <Text style={[styles.smallText, { marginLeft: 5}]}>Remember me</Text>
+                        <Text style={[styles.smallText, { marginLeft: 5 }]}>Remember me</Text>
                     </TouchableOpacity>
                     
                     <TouchableOpacity>
@@ -126,7 +141,6 @@ const LoginScreen = ({ navigation, setisLoggedIn }) => {
                     </TouchableOpacity>
                 </View>
 
-                {/* Login Button */}
                 <TouchableOpacity style={styles.loginButton} onPress={handleLogin} disabled={loading}>
                     {loading ? (
                         <ActivityIndicator size="small" color="#fff" />
@@ -135,7 +149,6 @@ const LoginScreen = ({ navigation, setisLoggedIn }) => {
                     )}
                 </TouchableOpacity>
 
-                {/* Sign In */}
                 <View style={styles.signInContainer}>
                     <Text style={styles.smallText}>Don't have an account?</Text>
                     <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
