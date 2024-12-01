@@ -118,7 +118,7 @@ const CustomHeader = () => {
                                 onPressOut={() => setHoveredItem(null)}  // Remove hover state
                             >
                         {/* About Us Icon */}
-                                <MaterialIcons name="info" size={20} color={currentRoute === 'Counter' ? '#E3E3D6' : '#555'} style={styles.menuIcon} />
+                                <MaterialIcons name="timer" size={20} color={currentRoute === 'Counter' ? '#E3E3D6' : '#555'} style={styles.menuIcon} />
                         {/* About Us Text */}
                                 <Text style={[
                                     styles.menuItem,
