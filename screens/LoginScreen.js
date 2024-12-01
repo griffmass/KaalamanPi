@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // commented out the useCallback
+import React, { useState, useCallback } from 'react'; // Added useCallback
 import { 
     View, 
     Text, 
@@ -57,14 +57,15 @@ const LoginScreen = ({ navigation, setisLoggedIn }) => {
         }
     };
 
-    // useFocusEffect(
-    //     useCallback(() => {
-    //         // Reset the input fields
-    //         setEmail("");
-    //         setPassword("");
-    //         setRememberMe(false);
-    //     }, [])
-    // );
+    useFocusEffect(
+        useCallback(() => {
+            // Reset the input fields
+            setEmail('');
+            setPassword('');
+            setRememberMe(false);
+        }, [])
+    );
+    
 
     
     return (
