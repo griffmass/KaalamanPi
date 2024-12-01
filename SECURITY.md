@@ -41,3 +41,4 @@ If you believe you have discovered a security vulnerability in KaalamanPi, we en
   • If declined or deemed out of scope, we will provide feedback explaining the decision.
 
   
+---
