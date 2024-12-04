@@ -20,14 +20,19 @@ export default function App() {
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
-  // Load Potta_One font
+  // Load fonts
   useEffect(() => {
     const loadFonts = async () => {
-      await Font.loadAsync({
-        'Protest-Riot': require('./assets/fonts/Protest_Riot/ProtestRiot-Regular.ttf'), // Make sure the path is correct
-        'Poppins': require('./assets/fonts/Poppins/Poppins-Regular.ttf'), //
-      });
-      setFontsLoaded(true);
+      try {
+        await Font.loadAsync({
+          'Protest-Riot': require('./assets/fonts/Protest_Riot/ProtestRiot-Regular.ttf'), // Make sure the path is correct
+          'Poppins-Regular': require('./assets/fonts/Poppins/Poppins-Regular.ttf'), // Regular Poppins
+          'Poppins-SemiBold': require('./assets/fonts/Poppins/Poppins-SemiBold.ttf'), // SemiBold Poppins
+        });
+        setFontsLoaded(true);
+      } catch (error) {
+        console.error('Error loading fonts:', error);
+      }
     };
 
     loadFonts();
@@ -76,31 +81,29 @@ export default function App() {
           options={{ header: () => <CustomHeader /> }}
         />
 
-        {/* Adding the ToggleStats screen to the navigator */}
         <Stack.Screen
           name="ToggleStats"
           component={Statistics_Probability}
-          options={{ header: () => <CustomHeader /> }} // Customize the header as needed
+          options={{ header: () => <CustomHeader /> }}
         />
 
-      <Stack.Screen
+        <Stack.Screen
           name="ToggleAlgebra"
           component={Algebra}
-          options={{ header: () => <CustomHeader /> }} // Customize the header as needed
+          options={{ header: () => <CustomHeader /> }}
         />
 
         <Stack.Screen
           name="ToggleGeometry"
           component={Geometry}
-          options={{ header: () => <CustomHeader /> }} // Customize the header as needed
+          options={{ header: () => <CustomHeader /> }}
         />
 
         <Stack.Screen
           name="Counter"
           component={Counter}
-          options={{ header: () => <CustomHeader /> }} // Customize the header as needed
+          options={{ header: () => <CustomHeader /> }}
         />
-
       </Stack.Navigator>
     </NavigationContainer>
   );
