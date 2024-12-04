@@ -30,26 +30,34 @@ const LoginScreen = ({ navigation, setisLoggedIn = () => {} }) => {
     // Check login status on app start
     useEffect(() => {
         const checkAuthState = async () => {
-            const storedEmail = await AsyncStorage.getItem('email');
-            const storedPassword = await AsyncStorage.getItem('password');
-            const storedRememberMe = JSON.parse(await AsyncStorage.getItem('rememberMe'));
-
-            if (storedRememberMe && storedEmail && storedPassword) {
-                try {
-                    setLoading(true);
-                    await signInWithEmailAndPassword(auth, storedEmail, storedPassword);
-                    setisLoggedIn(true);
-                    navigation.navigate('Home');
-                } catch (error) {
-                    console.error('Auto-login failed:', error.message);
-                } finally {
-                    setLoading(false);
+            try {
+                setLoading(true); // Show a loader during auto-login attempt
+    
+                const storedEmail = await AsyncStorage.getItem('email');
+                const storedPassword = await AsyncStorage.getItem('password');
+                const storedRememberMe = JSON.parse(await AsyncStorage.getItem('rememberMe'));
+    
+                if (storedRememberMe && storedEmail && storedPassword) {
+                    try {
+                        await signInWithEmailAndPassword(auth, storedEmail, storedPassword);
+                        setisLoggedIn(true);
+                        navigation.navigate('Home');
+                    } catch (error) {
+                        console.error('Auto-login failed:', error.message);
+                        await AsyncStorage.multiRemove(['email', 'password', 'rememberMe']);
+                    }
                 }
+            } catch (error) {
+                console.error('Error checking auth state:', error.message);
+            } finally {
+                setLoading(false); // Stop the loader
             }
         };
-
+    
         checkAuthState();
     }, []);
+    
+    
 
     // LOGIN FUNCTION WITH FIREBASE
     const handleLogin = async () => {
