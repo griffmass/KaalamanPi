@@ -55,10 +55,14 @@ function Counter() {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.navButton}
-          onPress={() => logout(navigation)} // Use the logout function
+          onPress={() => {
+            console.log("Logout from Counter Screen");
+            logout(navigation);
+          }}
         >
           <Text style={styles.navButtonText}>Logout</Text>
         </TouchableOpacity>
+
       </View>
     </View>
   );
