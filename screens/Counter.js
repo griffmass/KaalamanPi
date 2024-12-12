@@ -14,21 +14,39 @@ function Counter() {
   });
 
   useEffect(() => {
-    const sensorDataRef = ref(rtdb, "sensor_data");
-
-    const unsubscribe = onValue(sensorDataRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setSensorData({
-          temp: data.temp || 0,
-          humid: data.humid || 0,
-          dist_in_cm: data.dist_in_cm || 0,
-        });
-      }
+    const distanceRef = ref(rtdb, "sensorReading2/dist_in_cm");
+    const humidityRef = ref(rtdb, "sensorReading2/humid");
+    const temperatureRef = ref(rtdb, "sensorReading2/temp");
+  
+    const unsubscribeTemp = onValue(temperatureRef, (snapshot) => {
+      setSensorData((prevData) => ({
+        ...prevData,
+        temp: snapshot.val(),
+      }));
     });
-
-    return () => unsubscribe();
+  
+    const unsubscribeHumidity = onValue(humidityRef, (snapshot) => {
+      setSensorData((prevData) => ({
+        ...prevData,
+        humid: snapshot.val(),
+      }));
+    });
+  
+    const unsubscribeDistance = onValue(distanceRef, (snapshot) => {
+      setSensorData((prevData) => ({
+        ...prevData,
+        dist_in_cm: snapshot.val(),
+      }));
+    });
+  
+    return () => {
+      unsubscribeTemp();
+      unsubscribeHumidity();
+      unsubscribeDistance();
+    };
   }, []);
+  
+  
 
   const handleLogout = () => {
     Alert.alert(
