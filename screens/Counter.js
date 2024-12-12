@@ -1,68 +1,123 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, Image, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { ref, onValue, set } from "firebase/database";
+import { ref, onValue } from "firebase/database";
 import { rtdb } from "../firebaseConfig";
 import colors from "../components/colors";
-import { logout } from '../components/Logout';
 
 function Counter() {
   const navigation = useNavigation();
-  const [value, setValue] = useState(0);
+  const [sensorData, setSensorData] = useState({
+    temp: 0,
+    humid: 0,
+    dist_in_cm: 0,
+  });
 
   useEffect(() => {
-    const valueRef = ref(rtdb, "value");
-    return onValue(valueRef, (snapshot) => {
-      setValue(snapshot.val());
+    const sensorDataRef = ref(rtdb, "sensor_data");
+
+    const unsubscribe = onValue(sensorDataRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setSensorData({
+          temp: data.temp || 0,
+          humid: data.humid || 0,
+          dist_in_cm: data.dist_in_cm || 0,
+        });
+      }
     });
+
+    return () => unsubscribe();
   }, []);
 
-  const handlePlus = () => {
-    const valueRef = ref(rtdb, "value");
-    set(valueRef, value + 1);
-  };
-
-  const handleMinus = () => {
-    const valueRef = ref(rtdb, "value");
-    set(valueRef, value - 1);
+  const handleLogout = () => {
+    Alert.alert(
+      "Logout",
+      "Are you sure you want to log out?",
+      [
+        { text: "Cancel", style: "cancel" },
+        { text: "Logout", onPress: () => navigation.navigate("Login") },
+      ]
+    );
   };
 
   return (
     <View style={styles.container}>
       {/* Header */}
-      <Text style={styles.headerText}>Counter</Text>
+      <View style={styles.headerContainer}>
+        <View style={styles.divider} />
+        <TouchableOpacity onPress={() => navigation.navigate("Info")}>
+          <Image
+            source={require("../assets/info-icon.png")}
+            style={styles.infoIcon}
+          />
+        </TouchableOpacity>
+      </View>
 
-      {/* Counter Display */}
-      <View style={styles.counterContainer}>
-        <Text style={styles.valueText}>{value}</Text>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={handleMinus}>
-            <Text style={styles.buttonText}>-</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={handlePlus}>
-            <Text style={styles.buttonText}>+</Text>
-          </TouchableOpacity>
+      {/* Sensor Data Section */}
+      <View style={[styles.dataContainer, styles.shadow]}>
+        <View style={styles.dataBox}>
+          <Text style={styles.dataLabel}>Temperature</Text>
+          <Image
+            source={require("../assets/temperature-icon.png")}
+            style={styles.dataIcon}
+          />
+          <Text style={styles.dataValue}>{sensorData.temp}°C</Text>
+        </View>
+        <View style={styles.dataBox}>
+          <Text style={styles.dataLabel}>Humidity</Text>
+          <Image
+            source={require("../assets/humidity-icon.png")}
+            style={styles.dataIcon}
+          />
+          <Text style={styles.dataValue}>{sensorData.humid}%</Text>
         </View>
       </View>
 
-      {/* Navigation Buttons */}
-      <View style={styles.navContainer}>
+      {/* Distance Section */}
+      <View style={[styles.distanceContainer, styles.shadow]}>
+        <Text style={styles.distanceLabel}>Distance:</Text>
+        <Text style={styles.distanceValue}>{sensorData.dist_in_cm} cm</Text>
+      </View>
+
+      {/* Settings Section */}
+      <View style={[styles.settingsContainer, styles.shadow]}>
+        <Image
+          source={require("../assets/settings-icon.png")}
+          style={styles.settingsIcon}
+        />
+        <Text style={styles.settingsLabel}>Settings</Text>
+      </View>
+
+      {/* Navigation Footer */}
+      <View style={styles.footerNav}>
         <TouchableOpacity
-          style={styles.navButton}
+          style={styles.footerButton}
           onPress={() => navigation.navigate("Home")}
         >
-          <Text style={styles.navButtonText}>Home</Text>
+          <Image
+            source={require("../assets/home-icon.png")}
+            style={styles.footerIcon}
+          />
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.navButton}
-          onPress={() => {
-            console.log("Logout from Counter Screen");
-            logout(navigation);
-          }}
+          style={styles.footerButton}
+          onPress={() => navigation.navigate("Profile")}
         >
-          <Text style={styles.navButtonText}>Logout</Text>
+          <Image
+            source={require("../assets/profile-icon.png")}
+            style={styles.footerIcon}
+          />
         </TouchableOpacity>
-
+        <TouchableOpacity
+          style={styles.footerButton}
+          onPress={handleLogout}
+        >
+          <Image
+            source={require("../assets/exit-icon.png")}
+            style={styles.footerIcon}
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -71,69 +126,113 @@ function Counter() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.lighter,
-    alignItems: "center",
+    backgroundColor: colors.secondary,
     padding: 20,
-    justifyContent: "space-between",
   },
-  headerText: {
-    fontSize: 36,
-    fontFamily: "Protest-Riot",
-    color: colors.white,
-    marginVertical: 20,
-  },
-  counterContainer: {
-    backgroundColor: colors.white,
-    borderRadius: 10,
-    padding: 20,
-    alignItems: "center",
-    width: "90%",
-  },
-  valueText: {
-    fontSize: 100,
-    fontFamily: "Protest-Riot",
-    color: colors.black,
-    marginBottom: 20,
-  },
-  buttonContainer: {
+  headerContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "100%",
+    alignItems: "center",
+    marginBottom: 20,
   },
-  button: {
-    backgroundColor: colors.lighter,
+  infoIcon: {
+    width: 24,
+    height: 24,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: colors.black,
+    marginTop: 8,
+    flex: 1,
+  },
+  dataContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: colors.white,
+    padding: 20,
+    borderRadius: 10,
+    marginBottom: 20,
+  },
+  dataBox: {
+    alignItems: "center",
+    flex: 1,
+  },
+  dataLabel: {
+    fontSize: 16,
+    fontFamily: "Poppins",
+    color: colors.black,
+  },
+  dataValue: {
+    fontSize: 36,
+    fontFamily: "Potta-One",
+    color: colors.black,
+  },
+  dataIcon: {
+    width: 24,
+    height: 24,
+    marginTop: 5,
+  },
+  distanceContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: colors.white,
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 20,
+  },
+  distanceLabel: {
+    fontSize: 18,
+    fontFamily: "Poppins",
+    color: colors.black,
+  },
+  distanceValue: {
+    fontSize: 18,
+    fontFamily: "Potta-One",
+    color: colors.black,
+  },
+  settingsContainer: {
+    backgroundColor: colors.white,
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
-    flex: 1,
-    marginHorizontal: 5,
+    marginBottom: 20,
   },
-  buttonText: {
-    fontSize: 24,
-    fontFamily: "Protest-Riot",
-    color: colors.white,
+  settingsIcon: {
+    width: 24,
+    height: 24,
+    marginBottom: 5,
   },
-  navContainer: {
+  settingsLabel: {
+    fontSize: 18,
+    fontFamily: "Poppins",
+    color: colors.black,
+  },
+  footerNav: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "100%",
-    backgroundColor: colors.secondary,
-    borderRadius: 10,
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: colors.white,
     padding: 10,
   },
-  navButton: {
+  footerButton: {
     flex: 1,
     alignItems: "center",
     padding: 10,
-    marginHorizontal: 5,
-    backgroundColor: colors.white,
-    borderRadius: 10,
   },
-  navButtonText: {
-    fontSize: 16,
-    fontFamily: "Poppins",
-    color: colors.lighter,
-    fontWeight: "bold",
+  footerIcon: {
+    width: 24,
+    height: 24,
+  },
+  shadow: {
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
   },
 });
 
