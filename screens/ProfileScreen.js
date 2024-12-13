@@ -47,8 +47,8 @@ export default function ProfileScreen() {
       {/* Footer */}
       <View style={styles.footer}>
         <View style={styles.footerLogoTextContainer}>
-          <Image source={require("../assets/images/logo/kaalamanpi-vector.png")} style={styles.footerLogo} />
-          <Text style={styles.footerLogoText}>KaalamanPi</Text>
+          <Image source={require("../assets/images/logo/logo.png")} style={styles.footerLogo} />
+          <Text style={styles.footerLogoText}>SenseLink</Text>
         </View>
         <Text style={styles.textFooter}>
           By signing in, you agree to our Terms of Service and Privacy Policy

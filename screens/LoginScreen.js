@@ -16,9 +16,10 @@ import colors from '../components/colors';
 import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import { useFocusEffect } from '@react-navigation/native';
+import HomeScreen from './HomeScreen';
 
 // Import Logo and Background Image
-const logo = require('../assets/images/logo/kaalamanpi-vector-text.png');
+const logo = require('../assets/images/logo/login-logo.png');
 const backgroundImage = require('../assets/images/landing-page/math.jpg');
 
 const LoginScreen = ({ navigation, setisLoggedIn = () => {} }) => {

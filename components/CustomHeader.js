@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import colors from '../components/colors';
 
-const logo = require('../assets/images/logo/kaalamanpi-vector.png');
+const logo = require('../assets/images/logo/logo.png');
 
 const CustomHeader = () => {
     const navigation = useNavigation();
@@ -26,7 +26,7 @@ const CustomHeader = () => {
                 <TouchableOpacity>
                 <Image source={logo} style={styles.logo} />
                 </TouchableOpacity>
-                <Text style={styles.headerTitle}>KaalamanPi</Text>
+                <Text style={styles.headerTitle}>SenseLink</Text>
             </View>
 
             {/* Navigation Button */}
@@ -163,9 +163,9 @@ const styles = StyleSheet.create({
     },
 
     headerTitle: {
-        marginTop: 6,
+        marginTop: -10,
         fontSize: 18,
-        fontFamily: 'Poppins-SemiBold',
+        fontFamily: 'Protest-Riot',
         color: colors.white,
     },
     // Parent of 3 Line navigation button

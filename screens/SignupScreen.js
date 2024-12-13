@@ -17,7 +17,7 @@ import * as Font from "expo-font";
 import colors from "../components/colors";
 import { useFocusEffect } from "@react-navigation/native"; // reset inputs
 
-const logo = require("../assets/images/logo/kaalamanpi-vector-text.png");
+const logo = require("../assets/images/logo/login-logo.png");
 const backgroundImage = require("../assets/images/landing-page/math.jpg");
 const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -247,3 +247,4 @@ const styles = StyleSheet.create({
 });
 
 export default SignupScreen;
+
