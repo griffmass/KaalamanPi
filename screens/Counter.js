@@ -98,14 +98,7 @@ function Counter() {
         <Text style={styles.distanceValue}>{sensorData.dist_in_cm} cm</Text>
       </View>
 
-      {/* Settings Section */}
-      <View style={[styles.settingsContainer, styles.shadow]}>
-        <Image
-          source={require("../assets/settings-icon.png")}
-          style={styles.settingsIcon}
-        />
-        <Text style={styles.settingsLabel}>Settings</Text>
-      </View>
+
 
       {/* Navigation Footer */}
       <View style={styles.footerNav}>
@@ -154,22 +147,26 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   infoIcon: {
-    width: 24,
-    height: 24,
+    marginTop: -27,
+    width: 40,
+    height: 40,
+    marginLeft: -40, // Adjust this value to move it further left
   },
+  
   divider: {
-    height: 1,
+    height: 3,
     backgroundColor: colors.black,
-    marginTop: 8,
-    flex: 1,
+    marginTop: 40,
+    marginBottom: 5,
+    width: "100%",
   },
   dataContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     backgroundColor: colors.white,
-    padding: 20,
+    padding: 40,
     borderRadius: 10,
-    marginBottom: 20,
+    marginBottom: 30,
   },
   dataBox: {
     alignItems: "center",
@@ -195,9 +192,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: colors.white,
-    padding: 15,
+    padding: 25,
     borderRadius: 10,
-    marginBottom: 20,
+    marginBottom: 30,
   },
   distanceLabel: {
     fontSize: 18,
@@ -211,7 +208,7 @@ const styles = StyleSheet.create({
   },
   settingsContainer: {
     backgroundColor: colors.white,
-    padding: 15,
+    padding: 25,
     borderRadius: 10,
     alignItems: "center",
     marginBottom: 20,
