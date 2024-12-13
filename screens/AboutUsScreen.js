@@ -6,16 +6,21 @@ import { Linking } from 'react-native';
 // Information About The Members & Path to Images
 // This is an array [1] with 5 objects with their perspective name, role, and images properties 
 const teamMembers = [
-  { name: "Shaina Jasmin A. Orpilla", role: "Figma Login Desginer (Login, About Us, Profile)", image: require('../assets/images/people/me.jpg') },
-  { name: "John Michael G. Abanil", role: "Lead React Native Developer", image: require('../assets/images/people/jm.jpg') },
-  { name: "Janrow David F. Gallogo", role: "Figma Login Designer (Dashboard)", image: require('../assets/images/people/janrow.jpg') },
-  { name: "Ivan Fritz Clifford S. Alarva", role: "React Native Developer", image: require('../assets/images/people/ivan.jpg') },
-  { name: "Kristopher R. Macarubbo", role: "React Native Developer", image: require('../assets/images/people/kristopher2.jpg') },
+  { name: "Shaina Jasmin A. Orpilla", role: "Project Manager", image: require('../assets/images/people/me.jpg') },
+  { name: "John Michael G. Abanil", role: " Assurance Specialist, Release Manager, User Insight Specialist, Data Administrator, Substitute Back-end Developer", image: require('../assets/images/people/jm.jpg') },
+  { name: "Janrow David F. Gallogo", role: "UI/UX Developer", image: require('../assets/images/people/janrow.jpg') },
+  { name: "Ivan Fritz Clifford S. Alarva", role: "Front-end Developer", image: require('../assets/images/people/ivan.jpg') },
+  { name: "Kristopher R. Macarubbo", role: "Backend-end Developer", image: require('../assets/images/people/kristopher2.jpg') },
+  { name: "Karl Dave G. Acosta", role: "Finance", image: require('../assets/images/people/member.jpg') },
+  { name: "Eron Arenas", role: "Finance", image: require('../assets/images/people/member.jpg') },
+  { name: "Charles Kenjie Noronio", role: "Finance", image: require('../assets/images/people/member.jpg') },
+
+
 ];
 
 // Logo for footer
 const triangleImage = require('../assets/images/arrow/triangle.png');
-const logo = require('../assets/images/logo/kaalamanpi-vector.png');
+const logo = require('../assets/images/logo/logo.png');
 const facebookIcon = require('../assets/images/footer-icons/facebook.png');
 const instagramIcon = require('../assets/images/footer-icons/instagram.png');
 const emailIcon = require('../assets/images/footer-icons/email.png');
@@ -35,10 +40,10 @@ const AboutUsScreen = () => {
       <Text style={styles.headerText}>About Us</Text>
 
       {/* Paragraph Text */}
-      <Text style={styles.paragraph}>
+      {/* <Text style={styles.paragraph}>
         KaalamanPi is a platform that focuses on the integration of knowledge (kaalaman) 
         across various subjects, including math symbolized by "Pi."
-      </Text>
+      </Text> */}
 
       {/* Meet The Team Section */}
       <TouchableOpacity style={styles.meetTheTeamWrapper}>
@@ -82,26 +87,16 @@ const AboutUsScreen = () => {
       {/* Paragraph Section */}
       <View style={styles.additionalInfoContainer}>
         <Text style={styles.additionalInfoText}>
-          The math theme for the project
-          emphasizes clean, structured, and
-          logical design elements,
-          reflecting with mathematics. The design
-          aims to present information in
-          a clear, balanced, and visually
-          appealing way, ensuring an
-          intuitive user experience.
-          Each member contributes their
-          specialized knowledge to the
-          Figma design process, ensuring a
-          cohesive and well-rounded final
-          product:
+        We use the ESP32 to monitor room temperature and humidity, and control lights. 
+        The React Native app allows users to log in and view the temperature, humidity,
+         and control the lights,.
         </Text>
       </View>
 
       {/* Specialities Section */}
       <TouchableOpacity style={styles.SpecialitiesWrapper}>
         <View style={styles.SpecialitiesContainer}>
-        <Text style={styles.SpecialitiesText}>Implementation of Members' Specialities in Figma Design</Text>
+        <Text style={styles.SpecialitiesText}>Members' Specialties</Text>
         </View>
 
 
@@ -113,106 +108,117 @@ const AboutUsScreen = () => {
 
       {/* ORPILLA - UI Design Principles & UX Design Laws  */}
       <View style={styles.sectionContainer}>
-        <Text style={styles.sectionTitle}>I. UI Design Principles & UX Design Laws:</Text>
+        <Text style={styles.sectionTitle}>I.  Project Manager:</Text>
         <Text style={styles.bulletText}>
-        • Orpilla ensures that the user
+        • Orpilla is responsible for planning,
         </Text>
         <Text style={styles.subSectionText}>
-        interface (UI) follows best practices
-        by adhering to principles like
-        consistency, hierarchy, and
-        simplicity. By applying UX design
-        laws (e.g., Fitts' Law, Hick's Law),
-        they create an intuitive, efficient
-        experience, making it easy for users
-        to navigate through math-related
-        content.
+        organizing, and managing the project from 
+        start to finish in order to achieve a predefined 
+        goal or outcome.
         </Text>
       </View>
 
       {/* GALLOGO - User Persona Section */}
       <View style={styles.sectionContainer}>
-        <Text style={styles.sectionTitle}>II. User Persona:</Text>
+        <Text style={styles.sectionTitle}>II. UI/UX Developer:</Text>
         <Text style={styles.bulletText}>
-        • Gallogo crafts detailed user
+        • Gallogo perform tasks like wireframing, 
         </Text>
         <Text style={styles.subSectionText}>
-        personas, representing the target
-        audience for the math-themed
-        design. This helps in tailoring the
-        design to meet users' specific
-        needs, such as clarity for students
-        or professionals working with
-        mathematical data.
+        prototyping, and creating visually compelling designs. 
+        He make sure that the user interface is not only visually 
+        appealing but also intuitive and user-friendly.
         </Text>
       </View>
 
       {/* ABANIL - Color Theory & 60-30-0 Rule Section */}
       <View style={styles.sectionContainer}>
-        <Text style={styles.sectionTitle}>III. Color Theory & 60-30-10 Rule:</Text>
+        <Text style={styles.sectionTitle}>III. Assurance Specialist:</Text>
         <Text style={styles.bulletText}>
-        • Abanil utilizes color theory and the
+        • Abanil performs application testing to 
         </Text>
         <Text style={styles.subSectionText}>
-        60-30-10 rule to ensure visual harmony. 
-        By assigning 60% to a dominant color 
-        (Light Gray-Beige), 30% to a secondary color 
-        (Bluish Green), and 10% to an accent color 
-        (Vibrant Orange Yellow) & (Medium Gray), 
-        they enhance the design's visual appeal and 
-        readability, crucial for retaining user 
-        focus on math content.
+        assess the quality, functionality, and performance of the app,
+         with auditing for security vulnerabilities. 
+         They perform both manual and automated testing, 
+         ensure secure coding practices, and work towards 
+         maintaining the app according to data protection 
+         and cybersecurity standards.
         </Text>
       </View>
 
       {/* ALARVA - Spacing Section */}
       <View style={styles.sectionContainer}>
-        <Text style={styles.sectionTitle}>IV. Spacing:</Text>
+        <Text style={styles.sectionTitle}>IV. Front-end Developer:</Text>
         <Text style={styles.bulletText}>
-        • Alarva manages the spacing
+        • Alarva integrates the UI/UX design into 
         </Text>
         <Text style={styles.subSectionText}>
-        between elements, ensuring
-        the layout feels balanced and
-        uncluttered. Proper spacing
-        improves readability and helps
-        users easily process mathematical
-        information by visually separating
+        the front end of the app using React 
+        Native to provide a responsive and 
+        interactive user interface.
         content.
         </Text>
       </View>
 
       {/* MACARUBBO - Typography Section */}
       <View style={styles.sectionContainer}>
-        <Text style={styles.sectionTitle}>V. Typography:</Text>
+        <Text style={styles.sectionTitle}>V. Back-end Developer:</Text>
         <Text style={styles.bulletText}>
-        • Macarubbo has chosen a mix of
+        • Macarubbo assigned to build and 
         </Text>
         <Text style={styles.subSectionText}>
-          Protest Riot and Poppins fonts for the math-themed Figma design:
-        </Text>
-
-        {/* Protest-Riot */}
-        <Text style={[styles.subSectionItem,styles.sectionItemLine]}>a. Protest Riot: Adds elegance and</Text>
-        <Text style={styles.subSectionItem}>
-         draws attention to key sections. Perfect for 
-         highlighting major sections and drawing 
-         attention to important contents.
-        </Text>
-
-        {/* Poppins */}
-        <Text style={[styles.subSectionItem,styles.sectionItemLine]}>b. Poppins: Clean, modern sans-serif</Text>
-        <Text style={styles.subSectionItem}>
-              for body text, ensuring readability throughout the design.
-        </Text>
-
-        <Text style={[styles.bulletText,styles.sectionTextMargin]}>
-            • This combination creates a
-        </Text>
-        <Text style={styles.subSectionText}>
-              balanced, readable, and visually appealing layout.
+        maintain the server-side logic, databases, 
+        and other components of a mobile application.
+        He work behind the scenes to ensure that the
+        application runs smoothly and efficiently.
         </Text>
       </View>
+
+        {/* MACARUBBO - Typography Section */}
+            <View style={styles.sectionContainer}>
+        <Text style={styles.sectionTitle}>VI. Release Manager:</Text>
+        <Text style={styles.bulletText}>
+        • Abanil is responsible for merging front-
+        </Text>
+        <Text style={styles.subSectionText}>
+        end and back-end codebases and overseeing version control. 
+        To guarantee stable deployments and a predictable development 
+        workflow, they keep the team informed about versioning and the 
+        release timetable. 
+        </Text>
+      </View>
+
+        {/* MACARUBBO - Typography Section */}
+              <View style={styles.sectionContainer}>
+        <Text style={styles.sectionTitle}>VII. User Insight Specialist:</Text>
+        <Text style={styles.bulletText}>
+        • Abanil ensure that mobile application 
+        </Text>
+        <Text style={styles.subSectionText}>
+        feature developments align with user expectations, 
+        combines content strategy and consumer studies. 
+        He create in-app content that improves the app's 
+        usability and aligns it with user needs by analyzing 
+        market trends and user input.
+        </Text>
+      </View>
+
+        {/* MACARUBBO - Typography Section */}
+              <View style={styles.sectionContainer}>
+        <Text style={styles.sectionTitle}>VIII. Data Administrator:</Text>
+        <Text style={styles.bulletText}>
+        • Abanil is in charge of overall database 
+        </Text>
+        <Text style={styles.subSectionText}>
+        security, performance, and architecture. 
+        focuses on efficiency and dependability while 
+        optimizing data retrieval and storage to ensure
+         data access and integrity.
+        </Text>
+      </View>
+
 
       {/* Footer Section */}
       <View style={styles.footerContainer}>
@@ -249,12 +255,12 @@ const AboutUsScreen = () => {
         {/* Logo and Text */}
         <View style={styles.logoTextContainer}>
           <Image source={logo} style={styles.logo} />
-          <Text style={styles.logoText}>KaalamanPi</Text>
+          <Text style={styles.logoText}>SenseLink</Text>
         </View>
 
         {/* Copyright Text */}
         <Text style={styles.footertext}>
-            Copyright © 2024 KaalamanPi
+            Copyright © 2024 SenseLink
         </Text>
       </View>
     </ScrollView>
@@ -345,7 +351,7 @@ const styles = StyleSheet.create({
 
   // Custom Card Margin 
   kristopherCard: {
-    marginBottom: 15,
+    marginBottom: 90,
   },
 
   // Profile Picture Container
