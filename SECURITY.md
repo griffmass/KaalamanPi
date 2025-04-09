@@ -11,9 +11,11 @@ The following versions of KaalamanPi are actively supported with security update
 | 4.0.x   | :white_check_mark: Yes|
 | < 4.0   | :x: No                |
 
+We recommend using a supported version to ensure you receive important security fixes.
+
 ## Reporting a Vulnerability
 
-If you believe you have discovered a security vulnerability in KaalamanPi, we encourage you to responsibly disclose it. Please report the vulnerability using the following steps:
+If you discover a security issue in KaalamanPi, we appreciate your help in responsibly disclosing it. Here's how you can report it:
 
 ### 1. Report the issue via GitHub Issues:
 
